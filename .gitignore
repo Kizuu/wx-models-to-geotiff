@@ -1,5 +1,1 @@
-/web/pgcredentials.php
-/model_processing/template.map
-/model_processing/tempWxData/
-.vscode/settings.json
-/web/data/*
+/scripts/tempWxData/

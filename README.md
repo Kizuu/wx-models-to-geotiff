@@ -10,7 +10,7 @@
 ## What's Here
 `./db` has the Postgres table schemas that the script uses to keep track of things.
 
-`./model_processing` contains python code and JSON configuration for grabbing weather model data off the internet (via NCEP NOMADS), processing it, and organizing it on the file system.  This script is designed to be run on a regular basis from, for example, a cron job. See the readme in this folder for more information about the script.
+`./scripts` contains python code and JSON configuration for grabbing weather model data off the internet (via NCEP NOMADS), processing it, and organizing it on the file system.  This script is designed to be run on a regular basis from, for example, a cron job. See the readme in this folder for more information about the script.
 
 `./map` contains the MapServer mapfile and some auxiliary data. The use of a mapfile has been deprecated but it is still usable with a bit of tweaking.
 
