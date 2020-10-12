@@ -1,4 +1,5 @@
 # wx-models-to-geotiff
+More information: https://medium.com/swlh/automated-weather-model-processing-with-foss4g-lessons-learned-8aaaeda1e3bc
 
 ## Prerequisites
 * Linux (due to using SIGALRMs to kill faulty connections to NCEP -- otherwise this could be used on Windows. Good opportunity for a refactor.)
