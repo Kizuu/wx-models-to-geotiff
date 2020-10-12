@@ -1,0 +1,96 @@
+MAP
+ CONFIG "MS_ERRORFILE" "/map/wxdata_error.txt"
+ DEBUG OFF
+ FONTSET "./fonts.list"
+ OUTPUTFORMAT
+  NAME "jpeg"
+  DRIVER AGG/JPEG
+  MIMETYPE "image/jpeg"
+  IMAGEMODE RGB
+  EXTENSION "jpg"
+  FORMATOPTION "QUALITY=90"
+  FORMATOPTION "GAMMA=0.75"
+ END
+ IMAGETYPE PNG8
+ IMAGETYPE JPEG
+ PROJECTION
+  "init=epsg:4326"
+ END
+ LAYER
+  NAME wxdata
+  TYPE RASTER
+  STATUS ON
+  VALIDATION
+   "date" "[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])"
+   "time" "(2[0-3]|[01][0-9])"
+   "var" ".*"
+   "model" ".*"
+   "resampling" ".*"
+   "band" "[0-9]+"
+  END
+  PROJECTION
+   "init=epsg:4326"
+  END
+  METADATA
+   "wms_title" "wxdata"
+   "wms_srs"   "EPSG:4326 EPSG:3857"
+   "wms_extent" "-180 80 -60 20"
+   "wms_enable_request" "*"
+   "wms_formatlist" "image/png,image/jpeg"
+  END
+  DATA "/map/%model%/%model%_%date%_%time%Z_%var%.tif"
+  PROCESSING "BANDS=%band%"
+  PROCESSING "CLOSE_CONNECTION=ALWAYS"
+  PROCESSING "RESAMPLE=%resampling%"
+ END
+
+ LAYER
+  NAME wxdata_contours
+  TYPE LINE
+  STATUS OFF
+  VALIDATION
+   "date" "[0-9]{4}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])"
+   "time" "(2[0-3]|[01][0-9])"
+   "var" ".*"
+   "lbl_start" ".*"
+   "lbl_end" ".*"
+   "lbl_round" "[0-9]+"
+   "model" ".*"
+   "resampling" ".*"
+   "band" "[0-9]+"
+   "interval" "[0-9]+"
+  END
+  PROJECTION
+   "init=epsg:4326"
+  END
+  METADATA
+   "wms_title" "wxdata_contours"
+   "wms_srs"   "EPSG:4326 EPSG:3857"
+   "wms_extent" "-180 80 -60 20"
+   "wms_enable_request" "*"
+   "wms_formatlist" "image/png,image/jpeg"
+  END
+  CONNECTIONTYPE CONTOUR
+  DATA "/map/%model%/%model%_%date%_%time%Z_%var%.tif"
+  PROCESSING "BANDS=%band%"
+  PROCESSING "CLOSE_CONNECTION=ALWAYS"
+  PROCESSING "RESAMPLE=%resampling 
+  PROCESSING "CONTOUR_ITEM=con"
+  PROCESSING "CONTOUR_INTERVAL=%interval%"
+  LABELITEM "con"
+  CLASS
+   STYLE
+    WIDTH 2
+   END
+   TEXT ('%lbl_start%' + tostring([con],"%.%lbl_round%f") + '%lbl_end%')
+   LABEL
+    OUTLINECOLOR 255 255 255
+    OUTLINEWIDTH 2
+    SIZE 8
+    FONT "robotoblack"
+    TYPE truetype
+    POSITION AUTO
+   END
+  END
+ END
+END
